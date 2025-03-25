@@ -57,7 +57,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     private String extractUsername(String token) {
         Claims claims = Jwts.parserBuilder()
-                .setSigningKey(secretKey)
+                .setSigningKey(getSigningKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
