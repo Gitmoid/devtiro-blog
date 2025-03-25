@@ -24,6 +24,7 @@ public class TagController {
     public ResponseEntity<List<TagDto>> getAllTags() {
         List<Tag> tags = tagService.getTags();
         List<TagDto> tagRespons = tags.stream().map(tagMapper::toTagResponse).toList();
+
         return ResponseEntity.ok(tagRespons);
     }
 
@@ -31,6 +32,7 @@ public class TagController {
     public ResponseEntity<List<TagDto>> createTags(@RequestBody CreateTagsRequest createTagsRequest) {
        List<Tag> savedTags = tagService.createTags(createTagsRequest.getNames());
        List<TagDto> createdTagRespons = savedTags.stream().map(tagMapper::toTagResponse).toList();
+
        return new ResponseEntity<>(
                createdTagRespons,
                HttpStatus.CREATED
@@ -40,6 +42,7 @@ public class TagController {
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Void> deleteTag(@PathVariable UUID id) {
         tagService.deleteTag(id);
+
         return ResponseEntity.noContent().build();
     }
 }
