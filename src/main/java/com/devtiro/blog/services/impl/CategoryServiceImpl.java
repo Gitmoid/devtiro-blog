@@ -29,7 +29,7 @@ public class CategoryServiceImpl implements CategoryService {
         String categoryName = category.getName();
         if (categoryRepository.existsByNameIgnoreCase(categoryName)) {
             throw new IllegalArgumentException("Category with name " + category.getName() + " already exists.");
-        };
+        }
         return categoryRepository.save(category);
     }
 
