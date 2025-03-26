@@ -1,2 +1,4 @@
 /mvnw text eol=lf
 *.cmd text eol=crlf
+*.ts linguist-language=text
+*.tsx linguist-language=text
