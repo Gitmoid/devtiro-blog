@@ -1,53 +1,58 @@
-# React + TypeScript + Vite
+# Spring Boot Blog Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a Spring Boot-based blog platform, developed following the tutorial by [Aaron Bourne](https://www.youtube.com/@devtiro) on the [Devtiro Community](https://community.devtiro.com/c/welcome/) webpage.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md)
-  uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast
-  Refresh
+* **Category system** for organizing posts
+* **Flexible tagging system** that supports multiple tags per post
+* **Post creation** with draft and published states
+* **Filtering** functionality for both categories and tags
+* **User authentication**
 
-## Expanding the ESLint configuration
+## Getting Started (Docker & Node Based Setup on Windows)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+This setup assumes you're using Docker for the database and Node.js for the frontend.
 
-- Configure the top-level `parserOptions` property like this:
+1.  **Install and Run Docker:**
+    * Download and install [Docker Desktop](https://www.docker.com/products/docker-desktop/).
+    * Start Docker Desktop.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+2.  **Set up the Database with Docker Compose:**
+    * Navigate to the project's root directory in your terminal.
+    * Run the following command to start the database container (assuming you have a `docker-compose.yml` file configuring your database):
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or
-  `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+        ```bash
+        docker-compose up -d
+        ```
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+        * The `-d` flag runs the container in detached mode (in the background).
+        * Ensure that your `application.properties` or `application.yml` file is configured to connect to the docker database.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+3.  **Install Node.js:**
+    * Download and install [Node.js](https://nodejs.org/en/download).
+
+4.  **Install Frontend Dependencies:**
+    * Navigate to the frontend directory in your terminal.
+    * Run the following command to install the necessary Node.js dependencies:
+
+        ```bash
+        npm install
+        ```
+
+5.  **Run the Frontend Application:**
+    * Run the following command to start the frontend development server:
+
+        ```bash
+        npm run dev
+        ```
+
+6.  **Run the Spring Boot Backend Application:**
+    * run the spring boot application:
+
+        ```bash
+        ./mvnw spring-boot:run
+        ```
+
+7.  **Access the Application:**
+    * Open your web browser and visit `http://localhost:5173/` (or the appropriate port specified by your frontend).
