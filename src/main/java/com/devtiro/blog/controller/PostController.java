@@ -1,8 +1,10 @@
 package com.devtiro.blog.controller;
 
 import com.devtiro.blog.domain.CreatePostRequest;
+import com.devtiro.blog.domain.UpdatePostRequest;
 import com.devtiro.blog.domain.dtos.CreatePostRequestDto;
 import com.devtiro.blog.domain.dtos.PostDto;
+import com.devtiro.blog.domain.dtos.UpdatePostRequestDto;
 import com.devtiro.blog.domain.entities.Post;
 import com.devtiro.blog.domain.entities.User;
 import com.devtiro.blog.mappers.PostMapper;
@@ -54,5 +56,15 @@ public class PostController {
         PostDto createPostDto = postMapper.toDto(createdPost);
 
         return new ResponseEntity<>(createPostDto, HttpStatus.CREATED);
+    }
+
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<PostDto> updatePost(
+            @PathVariable UUID id,
+            @Valid @RequestBody UpdatePostRequestDto updatePostRequestDto) {
+        UpdatePostRequest updatePostRequest = postMapper.toUpdatePostRequest(updatePostRequestDto);
+        Post updatedPost = postService.updatePost(id, updatePostRequest);
+        PostDto updatedPostDto = postMapper.toDto(updatedPost);
+        return ResponseEntity.ok(updatedPostDto);
     }
 }
