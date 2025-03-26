@@ -1,12 +1,16 @@
 package com.devtiro.blog.controller;
 
+import com.devtiro.blog.domain.CreatePostRequest;
+import com.devtiro.blog.domain.dtos.CreatePostRequestDto;
 import com.devtiro.blog.domain.dtos.PostDto;
 import com.devtiro.blog.domain.entities.Post;
 import com.devtiro.blog.domain.entities.User;
 import com.devtiro.blog.mappers.PostMapper;
 import com.devtiro.blog.services.PostService;
 import com.devtiro.blog.services.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,5 +42,17 @@ public class PostController {
         List<PostDto> postDtos = draftPosts.stream().map(postMapper::toDto).toList();
 
         return ResponseEntity.ok(postDtos);
+    }
+
+    @PostMapping
+    public ResponseEntity<PostDto> createPost(
+            @Valid @RequestBody CreatePostRequestDto createPostRequestDto,
+            @RequestAttribute UUID userId) {
+        User loggedInUser = userService.getUserById(userId);
+        CreatePostRequest createPostRequest = postMapper.toCreatePostRequest(createPostRequestDto);
+        Post createdPost = postService.createPost(loggedInUser, createPostRequest);
+        PostDto createPostDto = postMapper.toDto(createdPost);
+
+        return new ResponseEntity<>(createPostDto, HttpStatus.CREATED);
     }
 }

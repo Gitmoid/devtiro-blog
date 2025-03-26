@@ -4,9 +4,9 @@ import com.devtiro.blog.domain.entities.Category;
 import com.devtiro.blog.repositories.CategoryRepository;
 import com.devtiro.blog.services.CategoryService;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
