@@ -18,7 +18,7 @@ public interface TagMapper {
 
     @Named("calculatePostCount")
     default Integer calculatePostCounts(Set<Post> posts) {
-        if(posts == null) {
+        if (posts == null) {
             return 0;
         }
         return (int) posts.stream().filter(post -> PostStatus.PUBLISHED.equals(post.getStatus()))

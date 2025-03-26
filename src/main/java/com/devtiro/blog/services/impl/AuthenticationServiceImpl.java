@@ -23,11 +23,9 @@ import java.util.Map;
 public class AuthenticationServiceImpl implements AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final UserDetailsService userDetailsService;
-
+    private final Long jwtExpiryMs = 86400000L;
     @Value("${jwt.secret}")
     private String secretKey;
-
-    private final Long jwtExpiryMs = 86400000L;
 
     @Override
     public UserDetails authenticate(String email, String password) {

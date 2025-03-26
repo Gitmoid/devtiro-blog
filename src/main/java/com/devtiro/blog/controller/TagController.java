@@ -30,13 +30,13 @@ public class TagController {
 
     @PostMapping
     public ResponseEntity<List<TagDto>> createTags(@RequestBody CreateTagsRequest createTagsRequest) {
-       List<Tag> savedTags = tagService.createTags(createTagsRequest.getNames());
-       List<TagDto> createdTagRespons = savedTags.stream().map(tagMapper::toTagResponse).toList();
+        List<Tag> savedTags = tagService.createTags(createTagsRequest.getNames());
+        List<TagDto> createdTagResponse = savedTags.stream().map(tagMapper::toTagResponse).toList();
 
-       return new ResponseEntity<>(
-               createdTagRespons,
-               HttpStatus.CREATED
-       );
+        return new ResponseEntity<>(
+                createdTagResponse,
+                HttpStatus.CREATED
+        );
     }
 
     @DeleteMapping(path = "/{id}")

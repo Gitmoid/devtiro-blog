@@ -25,10 +25,10 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class PostServiceImpl implements PostService {
+    private static final int WORDS_PER_MINUTE = 200;
     private final PostRepository postRepository;
     private final CategoryService categoryService;
     private final TagService tagService;
-    private static final int WORDS_PER_MINUTE = 200;
 
     @Override
     public Post getPost(UUID id) {
